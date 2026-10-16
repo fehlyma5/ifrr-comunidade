@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Memorial fotográfico colaborativo do IFRR. Nossa história é escrita todos os dias.">
+  <title>Memorial IFRR | Nossa história, todos os dias</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Memorial IFRR - início">
+      <span class="brand-mark">IFRR</span>
+      <span><strong>MEMORIAL</strong><small>Memórias que nos conectam</small></span>
+    </a>
+    <nav aria-label="Navegação principal">
+      <a href="#memorial">Explorar memórias</a>
+      <a href="#como-funciona">Como participar</a>
+      <a class="nav-cta" href="#enviar">Enviar foto <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> IFRR • RUMO AOS 50 ANOS</p>
+        <h1 id="hero-title">Nossa história é escrita <em>todos os dias.</em></h1>
+        <p class="hero-text">Uma aula que marcou, uma amizade que ficou, uma conquista para celebrar. Sua história também faz parte da nossa história.</p>
+        <div class="hero-actions">
+          <a class="button button-yellow" href="#enviar">＋ Compartilhar uma memória</a>
+          <a class="text-link" href="#memorial">Conhecer o memorial ↓</a>
+        </div>
+        <div class="hero-note"><span class="pulse"></span> Feito de lembranças reais da nossa comunidade</div>
+      </div>
+      <div class="hero-art">
+        <div class="photo-stack">
+          <div class="photo-frame photo-back"><div class="photo-placeholder placeholder-yellow">APRENDER<br>JUNTOS</div><span>Momentos que ficam</span></div>
+          <div class="photo-frame photo-front">
+            <div class="photo-placeholder placeholder-green"><span class="placeholder-icon">✳</span><strong>MEMÓRIAS<br>DO IFRR</strong><small>Uma história feita por muitas pessoas.</small></div>
+            <span class="photo-tag">#NossaHistóriaIFRR</span>
+          </div>
+          <div class="floating-sticker">Cada foto<br>conta algo.</div>
+        </div>
+        <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+      </div>
+    </section>
+
+    <section class="intro-strip" aria-label="Propósito do memorial">
+      <p>Não é só uma fotografia.</p><span>É um pedaço da nossa história.</span>
+      <p class="strip-right">E ela continua sendo escrita.</p>
+    </section>
+
+    <section class="section courses-section" id="memorial">
+      <div class="section-heading">
+        <div><p class="eyebrow">UM MEMORIAL, MUITAS HISTÓRIAS</p><h2>Encontre sua turma.</h2></div>
+        <p>Explore os registros por curso ou descubra momentos de toda a comunidade IFRR.</p>
+      </div>
+      <div class="filter-row" id="course-filters" aria-label="Filtrar por curso">
+        <button class="filter-chip active" data-course="Todos">Todas as memórias</button>
+        <button class="filter-chip" data-course="Letras">Letras</button>
+        <button class="filter-chip" data-course="TADS">TADS</button>
+        <button class="filter-chip" data-course="Biologia">Biologia</button>
+        <button class="filter-chip" data-course="Educação Física">Educação Física</button>
+        <button class="filter-chip" data-course="Saneamento Ambiental">Saneamento Ambiental</button>
+        <button class="filter-chip" data-course="Matemática">Matemática</button>
+        <button class="filter-chip" data-course="Gestão Hospitalar">Gestão Hospitalar</button>
+        <button class="filter-chip" data-course="Gestão de Turismo">Gestão de Turismo</button>
+      </div>
+      <div class="gallery-status" id="gallery-status" role="status">Carregando as memórias…</div>
+      <div class="gallery-grid" id="gallery-grid"></div>
+      <div class="empty-state" id="empty-state" hidden>
+        <span class="empty-icon">✳</span><h3>Este espaço está esperando por você.</h3>
+        <p>Seja a primeira pessoa a compartilhar uma lembrança desta categoria.</p>
+        <a href="#enviar" class="button button-green">Enviar uma foto</a>
+      </div>
+    </section>
+
+    <section class="upload-section" id="enviar">
+      <div class="upload-copy">
+        <p class="eyebrow eyebrow-light">SUA MEMÓRIA TEM LUGAR AQUI</p>
+        <h2>Você viveu.<br>Você registrou.<br><em>Agora, compartilhe.</em></h2>
+        <p>Ajude a construir um acervo coletivo que celebre as pessoas, os encontros e as conquistas que fazem parte da trajetória do IFRR.</p>
+        <div class="upload-promise"><span>01</span><p><strong>Escolha uma foto</strong><small>Um momento especial vivido na instituição.</small></p></div>
+        <div class="upload-promise"><span>02</span><p><strong>Conte a história</strong><small>Escreva uma legenda para guardar o contexto.</small></p></div>
+        <div class="upload-promise"><span>03</span><p><strong>Ajude a preservar</strong><small>Após análise, a memória poderá integrar o memorial.</small></p></div>
+      </div>
+      <form class="upload-form" id="upload-form">
+        <div class="form-heading"><span class="form-icon">↥</span><div><h3>Compartilhe sua memória</h3><p>Preencha os campos abaixo.</p></div></div>
+        <label class="upload-drop" for="photo-file" id="upload-drop">
+          <span class="upload-icon">＋</span><strong>Escolha uma fotografia</strong><small>JPG, PNG ou WebP • até 8 MB</small>
+          <span class="file-name" id="file-name">Nenhum arquivo selecionado</span>
+        </label>
+        <input id="photo-file" name="photo" type="file" accept="image/jpeg,image/png,image/webp" required>
+        <div class="form-grid">
+          <label>Curso <span class="required">*</span>
+            <select id="course" name="course" required>
+              <option value="">Selecione o curso</option>
+              <option>Letras</option><option>TADS</option><option>Biologia</option>
+              <option>Educação Física</option><option>Saneamento Ambiental</option>
+              <option>Matemática</option><option>Gestão Hospitalar</option><option>Gestão de Turismo</option>
+              <option>Memória institucional / evento</option>
+            </select>
+          </label>
+          <label>Ano aproximado
+            <input id="memory-year" name="memory-year" type="number" min="1970" max="2026" placeholder="Ex.: 2024">
+          </label>
+        </div>
+        <label>Legenda da fotografia <span class="required">*</span>
+          <textarea id="caption" name="caption" maxlength="500" rows="3" placeholder="O que estava acontecendo nesse dia? Por que esse momento é especial?" required></textarea>
+          <small class="field-hint"><span id="caption-count">0</span>/500 caracteres</small>
+        </label>
+        <label>Seu nome (opcional)
+          <input id="contributor" name="contributor" maxlength="100" placeholder="Como gostaria de ser identificado(a)?">
+        </label>
+        <label class="consent-row"><input id="permission" type="checkbox" required>
+          <span>Confirmo que posso enviar esta imagem e autorizo sua análise para possível inclusão no memorial. Sei que a publicação depende de aprovação e que devo respeitar a privacidade e os direitos de imagem das pessoas retratadas. <span class="required">*</span></span>
+        </label>
+        <button class="button button-green submit-button" type="submit" id="submit-button">Enviar para análise <span aria-hidden="true">↗</span></button>
+        <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+        <p class="privacy-note">As contribuições devem ser revisadas pela equipe responsável antes de aparecerem publicamente.</p>
+      </form>
+    </section>
+
+    <section class="closing-section" id="como-funciona">
+      <div class="closing-star">✳</div>
+      <p class="eyebrow">UM ACERVO CONSTRUÍDO POR TODOS</p>
+      <h2>O futuro vai querer conhecer<br><em>as histórias que vivemos hoje.</em></h2>
+      <p>Vamos guardar mais do que imagens. Vamos guardar o que nos trouxe até aqui.</p>
+      <a class="button button-yellow" href="#enviar">Fazer parte dessa história</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="#"><span class="brand-mark">IFRR</span><span><strong>MEMORIAL</strong><small>Memórias que nos conectam</small></span></a>
+    <p>Projeto colaborativo de memória institucional • IFRR</p>
+    <a href="#hero-title">Voltar ao topo ↑</a>
+  </footer>
+
+  <dialog class="photo-dialog" id="photo-dialog">
+    <button class="dialog-close" id="dialog-close" aria-label="Fechar imagem">×</button>
+    <img id="dialog-image" alt="">
+    <div class="dialog-caption"><span id="dialog-course"></span><h3 id="dialog-title"></h3><p id="dialog-meta"></p></div>
+    <button class="dialog-arrow dialog-prev" id="dialog-prev" aria-label="Foto anterior">‹</button>
+    <button class="dialog-arrow dialog-next" id="dialog-next" aria-label="Próxima foto">›</button>
+  </dialog>
+</body>
+</html>
